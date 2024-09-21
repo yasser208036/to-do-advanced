@@ -18,7 +18,9 @@ export default function Card({ title, tags, handleDelete, id }) {
       onDragStart={(e) => handleDragStart(e, id)}
       onDragEnd={handleDragEnd}
     >
-      <p>{title}</p>
+      <p>
+        {id} : {title}
+      </p>
       <div className="card_bottom">
         <div className="card_tags">
           {tags.map((tag) => (
