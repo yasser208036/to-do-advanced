@@ -4,13 +4,16 @@ import Tag from "./Tag";
 
 export default function Form({ setTasks }) {
   const [taskData, setTaskData] = useState({
+    id: 0,
     task: "",
     status: "todo",
     tags: [],
   });
+  // change task or status in state depending on which input changed
   const handleChange = (e) => {
     setTaskData({ ...taskData, [e.target.name]: e.target.value });
   };
+  // select tag or unselect tag by (add or remove tag from tags array)
   const selectTag = (tag) => {
     if (taskData.tags.includes(tag)) {
       const filterTags = taskData.tags.filter((item) => item !== tag);
@@ -27,7 +30,7 @@ export default function Form({ setTasks }) {
     e.preventDefault();
     if (taskData.task !== "" && taskData.tags.length > 0) {
       setTasks((prev) => {
-        return [...prev, taskData];
+        return [...prev, { ...taskData, id: prev.length + 1 }];
       });
       setTaskData({ task: "", status: "todo", tags: [] });
     }
